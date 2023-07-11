@@ -1,0 +1,15 @@
+README.md
+setup.py
+music_recommend_bot.egg-info/PKG-INFO
+music_recommend_bot.egg-info/SOURCES.txt
+music_recommend_bot.egg-info/dependency_links.txt
+music_recommend_bot.egg-info/requires.txt
+music_recommend_bot.egg-info/top_level.txt
+src/__init__.py
+src/exception.py
+src/logger.py
+src/utils.py
+src/components/__init__.py
+src/components/emotions_detection.py
+src/components/model_training.py
+src/pipeline/__init__.py
