@@ -1,120 +1,218 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <title>Chat App</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-  <script src="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/lib/languages/python.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>EM Song Recommendation</title>
+    <style>
+        body{
+            width: 100%;
+            height: 100vh;
+            background-image: url("{{ url_for('static', filename='images/banner.jpg') }}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 </head>
-
 <body>
-  <div class="container mt-5">
-    <h1 style="color:white">Chat Bot</h1>
-    <div class="chat-box mt-3">
-      <!-- Chat messages will be added here dynamically -->
-    </div>
-    <div class="form-group mt-3">
-      <textarea class="form-control" rows="3" placeholder="Type your message here" id="message-input"></textarea>
-    </div>
-    <button type="button" class="btn btn-primary" id="send-btn">Send</button>
-  </div>
-  <script>
-setInterval(highlightAll,1000);
-// Function to highlight code using highlight.js library
-function highlightAll() {
-  document.querySelectorAll("pre code").forEach(block => {
-    hljs.highlightBlock(block);
-  });
-}
-
-    const chatBox = document.querySelector(".chat-box");
-    const messageInput = document.querySelector("#message-input");
-    const sendBtn = document.querySelector("#send-btn");
-
-    function addMessage(message, isUserMessage) {
-      const messageDiv = document.createElement("div");
-      messageDiv.classList.add("mt-3", "p-3", "rounded");
-
-      if (isUserMessage) {
-        messageDiv.classList.add("user-message");
-
-      } else {
-        messageDiv.classList.add("bot-message");
-      }
-
-      messageDiv.innerHTML = `
-        <img src="{{ url_for('static', filename='images/user.png') }}" class="user-icon"><p>${message}</p>
-        `;
-
-      chatBox.appendChild(messageDiv);
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-
-
-
-    function sendMessage() {
-      const message = messageInput.value.trim();
-
-      if (message !== "") {
-        addMessage(message, true);
-
-        fetch("/api", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ message })
-        })
-          .then(response => response.json())
-          .then(data => {
-                      messageInput.value = "";
-            const messageDiv = document.createElement("div");
-            messageDiv.classList.add("mt-3", "p-3", "rounded");
-            messageDiv.classList.add("bot-message");
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <a class="navbar-brand text-white" href="{{url_for('home_page')}}">Song Recommendation</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
            
-            const content = data.content;
-            
-            // Check if the content has code block
-            const hasCodeBlock = content.includes("```");
-            if (hasCodeBlock) {
-              // If the content has code block, wrap it in a <pre><code> element
-              const codeContent = content.replace(/```([\s\S]+?)```/g, '</p><pre><code>$1</code></pre><p>');
+            <li class="nav-item link-info">
+              <a class="nav-link text-white" href="{{url_for('about_details')}}">About</a>
+            </li>
 
-             
-              messageDiv.innerHTML = `<img src="{{ url_for('static', filename='images/gpt.png') }}" class="bot-icon"><p>${codeContent}</p>`
-             
-            }
-            else{
-              messageDiv.innerHTML = `<img src="{{ url_for('static', filename='images/gpt.jpg') }}" class="bot-icon"><p>${content}</p>`
-            }
-            chatBox.appendChild(messageDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{url_for('contact_details')}}">Contact</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+    </nav>
 
-          })
-          .catch(error => console.error(error));
-      }
+    <section id="gif-image">
+        <div class="container">
+            <img src="{{ url_for('static', filename='images/gif1.gif') }}" alt="gif" height="100%" width="100%">
+        </div>
+    </section>
+
+    <section id="heading">
+        <h1 class="white">YOUR <span class="yellow">MUSIC</span></h1>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/youtube.jpg') }}" alt="" height="100%" width="100%">
+        </div>       
+    </section>
+      
+    <section id="about-app">
+        <main class="contain">
+            <p>Hello 👋 I'm</p>
+            <section class="animation">
+              <div class="first"><div>Emotion-Based</div></div>
+              <div class="second"><div>Song Recommend</div></div>
+              <div class="third"><div>Application</div></div>
+            </section>
+          </main>
+    </section>
+     
+    <section id="app">
+         <form action="{{url_for('recommend')}}" method="POST">
+            <select name="menu" id="menu">
+                <option value="" default>Choose</option>
+                <option value="happy">Happy</option>
+                <option value="sad">Sad</option>
+                <option value="surprise">Surprise</option>
+                <option value="fearful">Fearful</option>
+                <option value="neutral">Normal</option>
+                <option value="">disgusted</option>
+             </select>
+            <input type="submit" value="Recommend"> 
+         </form>
+    </section>
+
+    <div class="emotion">
+        <button onclick="callFunction()">Emotion-Based Recommendation</button> 
+    </div> 
+
+    <section id="slogan">
+        <div class="text-contain">
+            <h3>RELIEF FROM</h3>
+            <h3 class="orange">THINKING</h3>
+            <h3>ENJOY THE</h3>
+            <h3><span class="orange">MUSIC!</span></h3>
+        </div>
+        
+    </section>
+
+      <!-- Footer -->
+<footer class="bg-dark text-center text-white">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+  
+        <!-- Twitter -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-twitter"></i
+        ></a>
+  
+        <!-- Google -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-google"></i
+        ></a>
+  
+        <!-- Instagram -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-instagram"></i
+        ></a>
+  
+        <!-- Linkedin -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-linkedin-in"></i
+        ></a>
+  
+        <!-- Github -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-github"></i
+        ></a>
+      </section>
+      <!-- Section: Social media -->
+  
+      <!-- Section: Form -->
+      <section class="">
+        <form action="">
+          <!--Grid row-->
+          <div class="row d-flex justify-content-center">
+            <!--Grid column-->
+            <div class="col-auto">
+              <p class="pt-2">
+                <strong>Sign up for our newsletter</strong>
+              </p>
+            </div>
+            <!--Grid column-->
+  
+            <!--Grid column-->
+            <div class="col-md-5 col-12">
+              <!-- Email input -->
+              <div class="form-outline form-white mb-4">
+                <input type="email" id="form5Example21" class="form-control" />
+                <label class="form-label" for="form5Example21">Email address</label>
+              </div>
+            </div>
+            <!--Grid column-->
+  
+            <!--Grid column-->
+            <div class="col-auto">
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-outline-light mb-4">
+                Subscribe
+              </button>
+            </div>
+            <!--Grid column-->
+          </div>
+          <!--Grid row-->
+        </form>
+      </section>
+      <!-- Section: Form -->
+  
+      <!-- Section: Text -->
+      <section class="mb-4">
+        <p>
+            Music is generally defined as the art of arranging sound to create some combination of form, harmony, melody, rhythm, or otherwise expressive content. Definitions of music vary depending on culture, though it is an aspect of all human societies and a cultural universal.
+        </p>
+      </section>
+      <!-- Section: Text -->
+  
+      
+      <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright: Upendra Pratap Singh
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+  <script>
+    function callFunction() {
+      // Make an AJAX request to the server
+      fetch('/myfunction')
+        .then(response => {
+          if (response.ok) {
+            // Handle the response here if needed
+            console.log('Function called successfully');
+          } else {
+            console.log('Error calling the function');
+          }
+        })
+        .catch(error => {
+          console.log('Error calling the function:', error);
+        });
     }
-
-    
-    sendBtn.addEventListener("click", sendMessage);
-    messageInput.addEventListener("keydown", event => {
-      if (event.keyCode === 13 && !event.shiftKey) {
-        event.preventDefault();
-        sendMessage();
-      }
-    });
   </script>
-</body>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
 </html>

@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
+/* .bg-black{
+ background-color: black;
+} */
+
+.yellow{
+    color: yellow;
+}
+
+.orange{
+    color: orange;
+}
+
+#navbarSupportedContent ul li .text-white:hover{
+    color: green;
+}
+
+#gif-image{
+    position: relative;
+}
+
+#gif-image .container{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 30vh;
+    height: 15vh;
+
+}
+
+#heading{
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+#heading .white{
+    padding-top: 5px;
+   font-size: 80px;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#heading .logo{
+    position: absolute;
+    height: 8vh;
+    width: 20vh;
+    top: 0;
+    right: 380px;
+}
+
+#about-app{
+    height: 75%;
+    font-family:'Roboto'; 
+}
+#about-app p {
+    text-shadow: 0 0 7px rgba(255,255,255,.3), 0 0 3px rgba(255,255,255,.3);
+  }
+
+#about-app .contain{
+  padding-left: 10px;
+  padding-top: 20px;  
+  color: #e5e5e5;
+  font-size: 2.26rem;
+  text-transform: uppercase;
+  height: 100vh;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+}  
+
+#about-app .animation{
+    height:50px;
+    overflow:hidden;
+    margin-left: 1rem;
+}
+
+#about-app .animation > div > div {
+    padding: 0.25rem 0.75rem;
+    height:3rem;
+    margin-bottom: 2.81rem;
+    display:inline-block;
+  }
+#about-app .animation div:first-child {
+    animation: text-animation 8s infinite;
+  }
+  
+#about-app .first div {
+    background-color:#20a7d8;
+  }
+  
+#about-app .second div {
+    background-color:#CD921E;
+  }  
+
+#about-app .third div {
+    background-color:#c10528;
+  }  
+
+  @keyframes text-animation {
+    0% {margin-top: 0;}
+    10% {margin-top: 0;}
+    20% {margin-top: -5.62rem;}
+    30% {margin-top: -5.62rem;}
+    40% {margin-top: -11.24rem;}
+    60% {margin-top: -11.24rem;}
+    70% {margin-top: -5.62rem;}
+    80% {margin-top: -5.62rem;}
+    90% {margin-top: 0;}
+    100% {margin-top: 0;}
+  }  
+
+#app{
+    position: relative;
+}
+
+#app form{
+    position: absolute;
+    right: 80px;
+    bottom: 400px;
+}
+
+#app select{
+    border-radius: 5px;
+    width: 400px;
+    height: 40px;
+    background-color: transparent;
+    color: white;
+    font-size: 20px;
+}
+
+#app option{
+    background-color: black;
+    color: white;
+}
+
+#app input{
+    background-color: transparent;
+    color: white;
+    height: 40px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+#app input:hover{
+    background-color: green;
+}
+
+.emotion{
+    position: relative;
+}
+
+.emotion button{
+    position: absolute;
+    right: 80px;
+    bottom: 300px;
+    width: 500px;
+    height: 45px;
+    background-color: transparent;
+    color: whitesmoke;
+    border-radius: 10px;
+    border: 1px solid whitesmoke;
+    font-size: 20px;
+    transition: 0.4s;
+}
+
+.emotion button:hover{
+    background-color: green;
+}
+
+#slogan{
+    position: relative;
+    background-color: transparent;
+    color: white;
+    text-align: center;
+}
+
+#slogan .text-contain{
+   position: absolute;
+   bottom: 100px;
+   left: 50px;
+}
+
+#slogan h3{
+    font-size: 40px;
+    font-weight: 400;
+}

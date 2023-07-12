@@ -164,6 +164,6 @@ if __name__ == "__main__":
     test = "data/test"
     train_generator,validation_generator,num_train,num_val,batch_size,num_epoch = obj.data_generation(train,test)      
     model = obj.model_creation()
-    obj.train_model(model,num_train,batch_size,num_epoch,validation_generator,num_val,train_generator)      
+    obj.train_model(model)     
 
         

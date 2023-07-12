@@ -3,7 +3,7 @@ import sys
 from src.logger import logging
 from src.exception import CustomException
 from dataclasses import dataclass
-from model_training import BuildModel
+from src.components.model_training import BuildModel
 import cv2
 import numpy as np
 
@@ -34,6 +34,13 @@ class Detect:
             # start the webcam feed
             cap = cv2.VideoCapture(0)
             emotion = ""
+            if not cap.isOpened():
+                print("Unable to open the camera")
+                exit()
+
+            # Set a timer for 10 seconds
+            timer = cv2.getTickCount() + 3 * cv2.getTickFrequency() 
+
             while True:
                 # Find haar cascade to draw bounding box around face
                 ret, frame = cap.read()
@@ -53,7 +60,7 @@ class Detect:
                 cv2.imshow("Frame", frame)
                 key = cv2.waitKey(1) & 0xFF
                 # if the `q` key was pressed, break from the loop
-                if key == ord("q"):
+                if key == ord("q") :
                     break
         
             cap.release()
@@ -63,12 +70,12 @@ class Detect:
             logging.info("Error occured in detection")   
             raise CustomException(e,sys) 
 
-if __name__ == "__main__":
-    obj = BuildModel()
-    train = "data/train"
-    test = "data/test"
-    train_generator,validation_generator,num_train,num_val,batch_size,num_epoch = obj.data_generation(train,test)      
-    model = obj.model_creation()
-    obj2 = Detect(model)
-    emotion = obj2.display()
+# if __name__ == "__main__":
+#     obj = BuildModel()
+#     train = "data/train"
+#     test = "data/test"
+#     train_generator,validation_generator,num_train,num_val,batch_size,num_epoch = obj.data_generation(train,test)      
+#     model = obj.model_creation()
+#     obj2 = Detect(model)
+#     emotion = obj2.display()
         

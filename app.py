@@ -1,38 +1,49 @@
-from flask import Flask, render_template, request
-import openai
+from flask import Flask,request,render_template,jsonify
+from flask_fontawesome import FontAwesome
+from src.components.emotions_detection import Detect
+from src.components.model_training import BuildModel
+import webbrowser
 
 
-app = Flask(__name__)
+application=Flask(__name__)
 
-# Set up OpenAI API credentials
-openai.api_key = "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"
+app=application
+
+@app.route('/')
+def home_page():
+    return render_template('index.html')
+
+@app.route('/', methods=['GET','POST'])
+def recommend():
+    emotion = ''
+    if request.method == 'GET':
+        return render_template('index.html')
+    else:
+        emotion = request.form.get('menu')
+    webbrowser.open(f"https://www.youtube.com/results?search_query={emotion}+song")
+    return render_template('index.html',final_result = emotion)
+
+@app.route('/myfunction')
+def emotion_recommend():
+    obj = BuildModel()
+    train = "data/train"
+    test = "data/test"
+    train_generator,validation_generator,num_train,num_val,batch_size,num_epoch = obj.data_generation(train,test)      
+    model = obj.model_creation()
+    obj2 = Detect(model)
+    emotion = obj2.display()
+    webbrowser.open(f"https://www.youtube.com/results?search_query={emotion}+song")
+    return render_template('index.html',final_result = emotion)
 
 
-# Define the default route to return the index.html file
-@app.route("/")
-def index():
-    return render_template("index.html")
+@app.route('/about')
+def about_details():
+    return render_template('about.html')
 
-# Define the /api route to handle POST requests
-@app.route("/api", methods=["POST"])
-def api():
-    # Get the message from the POST request
-    message = request.json.get("message")
-    # Send the message to OpenAI's API and receive the response
-    
-    
-    completion = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "user", "content": message}
-    ]
-    )
-    if completion.choices[0].message!=None:
-        return completion.choices[0].message
+@app.route('/contact')
+def contact_details():
+    return render_template('contact.html')
 
-    else :
-        return 'Failed to Generate response!'
-    
 
-if __name__=='__main__':
-    app.run()
+if __name__=="__main__":
+    app.run(host='0.0.0.0',debug=True)
