@@ -1,8 +1,17 @@
 ### Emotion based Song Recommendation Application
 
-![image](https://github.com/ups1610/Emotion_based_music_recommender_application/assets/75423160/17431d50-7cb3-4842-a2ed-dfdbe547584e)
+![image](https://github.com/ups1610/Emotion_based_music_recommender_application/assets/75423160/a3fab38c-7181-45e5-8e35-9acaac0e9dda)
 
-![image](https://github.com/ups1610/Emotion_based_music_recommender_application/assets/75423160/0404cee5-3906-4b67-81e3-c6d66083c18d)
+####  To run the application
 
+```
+fork the repository
+
+pip install -r requirements.txt
+
+python app.py
+
+open http://127.0.0.1:5000/ on your browser
+```
 
 
