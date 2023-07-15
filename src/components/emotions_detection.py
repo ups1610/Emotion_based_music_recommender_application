@@ -37,8 +37,7 @@ class Detect:
             if not cap.isOpened():
                 print("Unable to open the camera")
                 exit()
-
-            # Set a timer for 10 seconds
+ 
             timer = cv2.getTickCount() + 3 * cv2.getTickFrequency() 
 
             while True:
@@ -59,7 +58,7 @@ class Detect:
                 # show the output frame
                 cv2.imshow("Frame", frame)
                 key = cv2.waitKey(1) & 0xFF
-                # if the `q` key was pressed, break from the loop
+                
                 if key == ord("q") :
                     break
         

@@ -13,5 +13,5 @@ src/components/__init__.py
 src/components/emotions_detection.py
 src/components/model_training.py
 src/pipeline/__init__.py
-src/pipeline/prediction_pipeline.py
+src/pipeline/detection_pipeline.py
 src/pipeline/training_pipeline.py

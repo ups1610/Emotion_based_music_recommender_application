@@ -1,5 +1,4 @@
 from flask import Flask,request,render_template,jsonify
-from flask_fontawesome import FontAwesome
 from src.components.emotions_detection import Detect
 from src.components.model_training import BuildModel
 import webbrowser
@@ -12,6 +11,21 @@ app=application
 @app.route('/')
 def home_page():
     return render_template('index.html')
+
+@app.route('/login',methods=['GET','POST'])
+def login_page():
+    name=''
+    password=''
+    if request.method == 'GET':
+        return render_template('login.html')
+    else:
+        name = request.form.get('name')
+        password = request.form.get('password')
+    if name == 'upendra' and password == '12345':
+        return render_template('index.html')
+    else:
+        message_alert = "Invalid username and password"
+        return render_template('login.html',result = message_alert)
 
 @app.route('/', methods=['GET','POST'])
 def recommend():
