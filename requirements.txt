@@ -6,6 +6,5 @@ keras
 matplotlib
 pandas
 flask
-openai
 Flask-FontAwesome
 -e .
