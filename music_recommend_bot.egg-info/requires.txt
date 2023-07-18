@@ -6,5 +6,5 @@ keras
 matplotlib
 pandas
 flask
-openai
 Flask-FontAwesome
+google-api-python-client

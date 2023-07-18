@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/songs.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>EM Song Recommendation</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" width="30" height="30" alt="">
+    </a>
+    <a class="navbar-brand" href="{{url_for('home_page')}}">Song Recommendation</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+       
+        <li class="nav-item link-info">
+          <a class="nav-link" href="{{url_for('about_details')}}">About</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{url_for('contact_details')}}">Contact</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+</nav>
+
+<section id="heading">
+  <h1 class="white">YOUR <span class="yellow">MUSIC</span></h1>
+  <div class="logo">
+      <img src="{{ url_for('static', filename='images/youtube.jpg') }}" alt="" height="100%" width="100%">
+  </div>       
+</section>
+
+<div class="row ml-4">
+  {% for key, item in data.items() %}
+  <div class="col">
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{item['thumbnail_url']}}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{item['title']}}</h5>
+        <p class="card-text">{{item['description']}}</p>
+        <a href="{{item['video_id']}}" class="btn btn-danger">Go Track</a>
+      </div>
+  </div>
+  </div>
+{% endfor %}
+</div>
+
+    
+</body>
+</html>

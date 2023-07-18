@@ -38,7 +38,7 @@ class Detect:
                 print("Unable to open the camera")
                 exit()
  
-            timer = cv2.getTickCount() + 3 * cv2.getTickFrequency() 
+            timer = cv2.getTickCount() + 5 * cv2.getTickFrequency() 
 
             while True:
                 # Find haar cascade to draw bounding box around face
@@ -58,8 +58,11 @@ class Detect:
                 # show the output frame
                 cv2.imshow("Frame", frame)
                 key = cv2.waitKey(1) & 0xFF
+
+                if cv2.getTickCount() > timer:
+                    break
                 
-                if key == ord("q") :
+                if key == ord("q"):
                     break
         
             cap.release()
@@ -69,12 +72,4 @@ class Detect:
             logging.info("Error occured in detection")   
             raise CustomException(e,sys) 
 
-# if __name__ == "__main__":
-#     obj = BuildModel()
-#     train = "data/train"
-#     test = "data/test"
-#     train_generator,validation_generator,num_train,num_val,batch_size,num_epoch = obj.data_generation(train,test)      
-#     model = obj.model_creation()
-#     obj2 = Detect(model)
-#     emotion = obj2.display()
-        
+

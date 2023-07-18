@@ -7,4 +7,6 @@ matplotlib
 pandas
 flask
 Flask-FontAwesome
+google-api-python-client
+
 -e .
