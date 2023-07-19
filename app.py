@@ -9,9 +9,11 @@ application=Flask(__name__)
 
 app=application
 
+@app.route('/')
+def sangeet():
+    return render_template('front.html')
 
-
-@app.route('/',methods=['GET','POST'])
+@app.route('/login',methods=['GET','POST'])
 def login_page():
     name=''
     password=''
