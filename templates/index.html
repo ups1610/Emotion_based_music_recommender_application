@@ -43,7 +43,14 @@
           </form>
         </div>
     </nav>
-
+    {% for message in get_flashed_messages()%}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
     <section id="gif-image">
         <div class="container">
             <img src="{{ url_for('static', filename='images/gif1.gif') }}" alt="gif" height="100%" width="100%">

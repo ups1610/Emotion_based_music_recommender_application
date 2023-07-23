@@ -15,7 +15,7 @@ def get_requirements(file_path:str)->List[str]:
 
 
 setup(
-    name='music_recommend_bot',
+    name='music_recommend_app',
     version='0.0.1',
     author='Upendra',
     author_email='pratapsinghupendra96@gmail.com',

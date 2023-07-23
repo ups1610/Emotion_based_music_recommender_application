@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <title>Get Sangeet</title>
+    <style>
+        body{
+    background: #eee;
+}
+#side_nav{
+    background: #000;
+    min-width: 250px;
+    max-width: 250px;
+    transition: all 0.2s;
+}
+.content{
+    min-height: 100vh;
+    width: 100%;
+}
+.sidebar li.active{
+    background: #eee;
+    border-radius: 8px;
+}
+
+.sidebar li.active a, .sidebar li.active a:hover{
+    color: #000;
+}
+
+.sidebar a{
+   color: #fff;
+}
+.dashboard-container-2, .dashboard-container-3, .dashboard-container-4, .dashboard-container-5{
+    display: none;
+}
+.width{
+    width: 163vh;
+}
+.yellow{
+    color: rgb(236, 204, 1);
+}
+@media(max-width: 767px){
+    #side_nav{
+        margin-left: -250px;
+        position: fixed;
+        min-height: 100vh;
+        z-index: 1;
+    }
+
+    #side_nav.active{
+        margin-left: 0;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="main-container d-flex">
+        <div class="sidebar" id="side_nav">
+            <div class="header-box pt-3 px-2 pb-4 d-flex justify-content-between">
+                <h2 class="fs-4"><span class="me-2 "><img src="{{ url_for('static', filename='images/web_logo.png') }}" width="30" height="30" alt=""></span><span class="text-white w-100">Get Sangeet</span></h2>
+                <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="fa-solid fa-bars-staggered"></i></button>
+            </div>
+            <ul class="list-unstyled px-2">
+                 <li class="active"><a href="#" class="text-decoration-none px-3 py-2 d-block active" id="showDivLink"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                 <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block" id="showDivLink-2"><i class="fa-solid fa-face-smile"></i></i> FEM song Recommend</a></li>
+                 <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block" id="showDivLink-3"><i class="fa-solid fa-music"></i> Search Recommend</a></li>
+                 <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block" id="showDivLink-4"><i class="fa-solid fa-video"></i> Movies Recommend</a></li>
+                 <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block" id="showDivLink-5"><i class="fa-solid fa-graduation-cap"></i> University Recommend</a></li>
+            </ul>
+            <hr class="h-color text-white mx-2">
+
+            <ul class="list-unstyled px-2">
+                <li class="dropdown"><a href="#" class="text-decoration-none dropdown-toggle px-3 py-2" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gear"></i> Appearance</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#" id="effect">Dark</a></li>
+                        <li><a class="dropdown-item" href="#" id="effect">Light</a></li>
+                      </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                <div class="d-flex justify-content-between d-sm-none d-md-block  d-none d-sm-block">
+                    <i class="fa-regular fa-snowflake fa-spin fa-spin-reverse fs-4" style="color: #000000;"></i>
+                </div>
+                <div class="d-flex justify-content-between d-md-none d-block">
+                  <a class="navbar-brand fs-4" href="#"><img src="{{ url_for('static', filename='images/web_logo.png') }}" alt="" width="30" height="30"> Get Sangeet</a>
+                  <button class="btn px-1 py-0 open-btn"><i class="fa-solid fa-bars-staggered"></i></button>
+                </div>
+                    <form class="d-flex">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav>
+
+            <div class="dashboard-container" id="myDiv">
+                <h2>Dashboard</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut a nobis repellat omnis voluptas. Adipisci suscipit libero animi? Pariatur, velit corporis aliquam maxime deleniti corrupti ex voluptatum consequuntur commodi nesciunt.</p>
+              </div>
+
+              <div class="dashboard-container-2" id="myDiv-2">
+                <div class="alert alert-light m-2 fs-4" role="alert">
+                    Face Emotion Song Recommendation
+                </div>
+                
+                <div class="alert alert-light m-2" role="alert">
+                    <h1 class="text-center"><span>Your </span><span class="yellow">Music</span><span><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" width="60" height="60"></span></h1>
+
+                    <h3 class="text-center">😀 😔 😮 😱 😐 😎 😄</h3>
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="text-center text-primary mt-5">Get Relief</h4>
+                            <h4 class="text-center yellow mt-1">From</h4>
+                            <h4 class="text-center mt-1">Thinking</h4>
+                            <div class="d-grid gap-2 col-5 mx-auto mt-5">
+                                <button class="btn btn-outline-success fs-4" type="button">Tap to Recommend</button>    
+                            </div>
+                        </div>
+                        <div class="col mt-2">
+                            <img src="{{url_for('video_feed')}}" alt="" height="100%" width="100%" class="rounded">
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="alert alert-light m-2" role="alert">
+                    <h5 class="text-center">
+                        <a class="mr-2" href="#"><i class="fa-brands fa-linkedin" style="color: #000000;"></i></a>
+                        <a class="mr-2" href="#"><i class="fa-brands fa-github" style="color: #000000;"></i></a>
+                        <a class="mr-2" href="#"><i class="fa-solid fa-file" style="color: #000000;"></i></a>
+                    </h5>
+                         
+                    <h5 class="text-center">Developed By Upendra Pratap Singh</h5>
+                </div>
+              </div>
+              
+              <div class="dashboard-container-3" id="myDiv-3">
+                <h2>Search Recommend</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut a nobis repellat omnis voluptas. Adipisci suscipit libero animi? Pariatur, velit corporis aliquam maxime deleniti corrupti ex voluptatum consequuntur commodi nesciunt.</p>
+              </div>
+
+              <div class="dashboard-container-4" id="myDiv-4">
+                <h2>Movies Recommend</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut a nobis repellat omnis voluptas. Adipisci suscipit libero animi? Pariatur, velit corporis aliquam maxime deleniti corrupti ex voluptatum consequuntur commodi nesciunt.</p>
+              </div>
+
+              <div class="dashboard-container-5" id="myDiv-5">
+                <h2>College Recommend</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut a nobis repellat omnis voluptas. Adipisci suscipit libero animi? Pariatur, velit corporis aliquam maxime deleniti corrupti ex voluptatum consequuntur commodi nesciunt.</p>
+              </div>
+        </div>
+        
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(".sidebar ul li").on('click',function(){
+            $(".sidebar ul li.active").removeClass('active');
+            $(this).addClass('active');
+        })
+
+        $('.open-btn').on('click',function(){
+            $('.sidebar').addClass('active');
+        })
+
+        $('.close-btn').on('click',function(){
+            $('.sidebar').removeClass('active');
+        })
+    </script>
+           
+    <script>
+        document.getElementById('showDivLink').addEventListener('click', function() {
+            fetch('/show_div')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('myDiv').style.display = 'block';
+                        document.getElementById('myDiv-2').style.display = 'none';
+                        document.getElementById('myDiv-3').style.display = 'none';
+                        document.getElementById('myDiv-4').style.display = 'none';
+                        document.getElementById('myDiv-5').style.display = 'none';
+                    }
+                })
+                .catch(error => console.error(error));
+        });
+        document.getElementById('showDivLink-2').addEventListener('click', function() {
+            fetch('/show_div')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('myDiv-2').style.display = 'block';
+                        document.getElementById('myDiv').style.display = 'none';
+                        document.getElementById('myDiv-3').style.display = 'none';
+                        document.getElementById('myDiv-4').style.display = 'none';
+                        document.getElementById('myDiv-5').style.display = 'none';
+                    }
+                })
+                .catch(error => console.error(error));
+        });
+        document.getElementById('showDivLink-3').addEventListener('click', function() {
+            fetch('/show_div')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('myDiv-3').style.display = 'block';
+                        document.getElementById('myDiv').style.display = 'none';
+                        document.getElementById('myDiv-2').style.display = 'none';
+                        document.getElementById('myDiv-4').style.display = 'none';
+                        document.getElementById('myDiv-5').style.display = 'none';
+                    }
+                })
+                .catch(error => console.error(error));
+        });
+        document.getElementById('showDivLink-4').addEventListener('click', function() {
+            fetch('/show_div')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('myDiv-4').style.display = 'block';
+                        document.getElementById('myDiv').style.display = 'none';
+                        document.getElementById('myDiv-2').style.display = 'none';
+                        document.getElementById('myDiv-3').style.display = 'none';
+                        document.getElementById('myDiv-5').style.display = 'none';
+                    }
+                })
+                .catch(error => console.error(error));
+        });
+        document.getElementById('showDivLink-5').addEventListener('click', function() {
+            fetch('/show_div')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('myDiv-5').style.display = 'block';
+                        document.getElementById('myDiv').style.display = 'none';
+                        document.getElementById('myDiv-2').style.display = 'none';
+                        document.getElementById('myDiv-3').style.display = 'none';
+                        document.getElementById('myDiv-4').style.display = 'none';
+                    }
+                })
+                .catch(error => console.error(error));
+        });
+    </script>
+</body>
+</html>
