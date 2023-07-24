@@ -14,7 +14,7 @@ class get_data:
 class you_scrap:
     def __init__(self):
         self.get_data = get_data()
-        self.youtube_api_key = "AIzaSyAwRB2iCiaT-TTrnvBYfEpLrtT6TECalkU"
+        self.youtube_api_key = ""
         self.youtube = build("youtube", "v3", developerKey=self.youtube_api_key)
         logging.info("Api setup done.")
 

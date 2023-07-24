@@ -11,6 +11,25 @@ import cv2
 application=Flask(__name__)
 app=application
 app.secret_key = "super secret key"
+# camera=cv2.VideoCapture(0)
+
+# def generate_frames():
+#     while True:
+            
+#         ## read the camera frame
+#         success,frame=camera.read()
+#         if not success:
+#             break
+#         else:
+#             ret,buffer=cv2.imencode('.jpg',frame)
+#             frame=buffer.tobytes()
+
+#         yield(b'--frame\r\n'
+#                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+# @app.route('/video')
+# def video():
+#     return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')        
 
 #==================Home page===================================
 @app.route('/')
@@ -70,9 +89,13 @@ def register():
         return render_template('register.html') 
     
 #=====================Dashboard===============================
-@app.route('/go')
+@app.route('/dashboard')
 def base():
-    return render_template('base.html')
+    chart_data = {
+        'labels': ['FER', 'Search R', 'Movies R', 'University R'],
+        'values': [10, 20, 15, 30]
+    }
+    return render_template('base.html',chart_data=chart_data)
 
 @app.route('/show_div')
 def show_div():
@@ -116,9 +139,9 @@ def emotion_recommend():
 
 
 
-@app.route('/video')
-def video_feed():
-    return Response(mimetype='multipart/x-mixed-replace; boundary=frame')
+# @app.route('/video')
+# def video():
+#     return Response(mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/about')
 def about_details():

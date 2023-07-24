@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <title>Get Sangeet</title>
+    <title>Get Recommend</title>
     <style>
         body{
     background: #eee;
@@ -61,7 +60,7 @@
     <div class="main-container d-flex">
         <div class="sidebar" id="side_nav">
             <div class="header-box pt-3 px-2 pb-4 d-flex justify-content-between">
-                <h2 class="fs-4"><span class="me-2 "><img src="{{ url_for('static', filename='images/web_logo.png') }}" width="30" height="30" alt=""></span><span class="text-white w-100">Get Sangeet</span></h2>
+                <h2 class="fs-4"><span class="me-2 "><img src="{{ url_for('static', filename='images/web.png') }}" width="30" height="30" alt=""></span><span class="text-white w-100">Get Recommend</span></h2>
                 <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="fa-solid fa-bars-staggered"></i></button>
             </div>
             <ul class="list-unstyled px-2">
@@ -89,7 +88,7 @@
                     <i class="fa-regular fa-snowflake fa-spin fa-spin-reverse fs-4" style="color: #000000;"></i>
                 </div>
                 <div class="d-flex justify-content-between d-md-none d-block">
-                  <a class="navbar-brand fs-4" href="#"><img src="{{ url_for('static', filename='images/web_logo.png') }}" alt="" width="30" height="30"> Get Sangeet</a>
+                  <a class="navbar-brand fs-4" href="#"><img src="{{ url_for('static', filename='images/web_l.png') }}" alt="" width="30" height="30"> Get Recommend</a>
                   <button class="btn px-1 py-0 open-btn"><i class="fa-solid fa-bars-staggered"></i></button>
                 </div>
                     <form class="d-flex">
@@ -100,8 +99,61 @@
             </nav>
 
             <div class="dashboard-container" id="myDiv">
-                <h2>Dashboard</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut a nobis repellat omnis voluptas. Adipisci suscipit libero animi? Pariatur, velit corporis aliquam maxime deleniti corrupti ex voluptatum consequuntur commodi nesciunt.</p>
+                <div class="alert alert-light m-2 fs-4" role="alert">
+                    Dashboard
+                </div>
+                <div class="alert alert-light m-2 fs-4" role="alert">
+                    <div class="container px-4">
+                        <div class="row gx-5">
+                          <div class="col rounded">
+                           <div class="p-2 border bg-success text-white rounded">Total Recommendation</div>
+                           <div class="p-2 border text-dark rounded">20</div>
+                          </div>
+                          <div class="col rounded">
+                            <div class="p-2 border bg-warning text-white rounded">Total Users</div>
+                            <div class="p-2 border text-dark rounded">20</div>
+                          </div>
+                          <div class="col rounded">
+                            <div class="p-2 border bg-info text-white rounded">Features</div>
+                            <div class="p-2 border  text-dark rounded">4</div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="alert alert-light m-2 fs-4 px-5" role="alert">
+                    <div class="row ">
+                        <div class="col mt-5">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                        <div class="col align-item-center">
+                                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                      <div class="carousel-item active">
+                                        <img src="{{ url_for('static', filename='images/music.jpg') }}" class="d-block w-100 rounded ml-5" alt="...">
+                                      </div>
+                                      <div class="carousel-item">
+                                        <img src="{{ url_for('static', filename='images/movies.jpg') }}" class="d-block w-100 rounded ml-5" alt="...">
+                                      </div>
+                                      <div class="carousel-item">
+                                        <img src="{{ url_for('static', filename='images/college.webp') }}" class="d-block w-100 rounded ml-5" alt="...">
+                                      </div>
+                                    </div>
+                                  </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-light m-2" role="alert">
+                    <h5 class="text-center">
+                        <a class="mr-2" href="#"><i class="fa-brands fa-linkedin" style="color: #000000;"></i></a>
+                        <a class="mr-2" href="#"><i class="fa-brands fa-github" style="color: #000000;"></i></a>
+                        <a class="mr-2" href="#"><i class="fa-solid fa-file" style="color: #000000;"></i></a>
+                    </h5>
+                         
+                    <h5 class="text-center">Developed By Upendra Pratap Singh</h5>
+                </div>
+                
               </div>
 
               <div class="dashboard-container-2" id="myDiv-2">
@@ -122,9 +174,9 @@
                                 <button class="btn btn-outline-success fs-4" type="button">Tap to Recommend</button>    
                             </div>
                         </div>
-                        <div class="col mt-2">
-                            <img src="{{url_for('video_feed')}}" alt="" height="100%" width="100%" class="rounded">
-                        </div>
+                        <figure class="figure col mt-2 rounded">
+                            <img class="bg-dark rounded" src="" alt="" height="100%" width="100%">
+                        </figure>
                     </div>
                     
                 </div>
@@ -160,6 +212,7 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(".sidebar ul li").on('click',function(){
             $(".sidebar ul li.active").removeClass('active');
@@ -247,5 +300,35 @@
                 .catch(error => console.error(error));
         });
     </script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var chartData = {{ chart_data | tojson | safe }};
+    
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Recommendation per User',
+                        data: chartData.values,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
