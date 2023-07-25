@@ -12,6 +12,7 @@ src/utils.py
 src/components/__init__.py
 src/components/emotions_detection.py
 src/components/model_training.py
+src/components/movies_recommend.py
 src/components/youtube_data_scrap.py
 src/pipeline/__init__.py
 src/pipeline/detection_pipeline.py

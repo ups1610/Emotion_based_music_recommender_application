@@ -8,3 +8,4 @@ pandas
 flask
 Flask-FontAwesome
 google-api-python-client
+lxml

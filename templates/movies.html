@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+     <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Auto Complete -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
+  
+    <!-- External CSS -->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/movies.css') }}">
+
+    <title>Get Recommend</title>
+    <style>
+        #content{
+            background-image: url("{{ url_for('static',filename='images/movie_background.jpg') }}");
+        }
+        #loader {
+          display: none;
+          position: fixed;
+          z-index: 100;
+          left: 0;
+          top:0;
+          width: 100%;
+          height: 100%;
+          background-image: url("../static/loader.gif");
+          background-size: 40%;
+          background-position: 50% 50%;
+          background-color: rgba(255, 255, 255, 1);
+          background-repeat: no-repeat;
+          -webkit-transition: background-image 0.2s ease-in-out;
+          transition: background-image 0.2s ease-in-out;
+      }
+      @media only screen and (min-width: 651px){
+        #loader {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top:0;
+        width: 100%;
+        height: 100%;
+        background-image: url("../static/loader.gif");
+        background-size: 20%;
+        background-position: 50% 50%;
+        background-color: rgba(255, 255, 255, 1);
+        background-repeat: no-repeat;
+        -webkit-transition: background-image 0.2s ease-in-out;
+        transition: background-image 0.2s ease-in-out;
+    }
+  
+      }
+    </style>
+
+    <script type="text/javascript">
+        var films = {{suggestions|tojson}};
+        $(document).ready(function(){
+          $("#myModal").modal('show');
+        });
+      </script>
+</head>
+<body id="content" style="font-family: 'Noto Sans JP', sans-serif;">
+    <div class="body-content">
+        <div class="ml-container" style="display: block;">
+        <h1 class="text-center text-light m-5">Movies Mania</h1>
+        <div class="form-group shadow-textarea" style="margin-top: 30px;text-align: center;color: white;">
+            <input type="text" name="movie" class="movie form-control" id="autoComplete" autocomplete="off" placeholder="Movie Name" style="background-color: #ffffff;border-color:#ffffff;width: 60%;color: #181818" required="required" />
+            <br>
+        </div>
+    
+        <div class="form-group" style="text-align: center;">
+          <button class="btn btn-primary btn-block movie-button" style="color:black; background-color: rgb(152, 147, 133);text-align: center;border-color: white;width:120px;" disabled="true" >Enter</button><br><br>
+        </div>
+        </div>
+    
+      <div id="loader" class="text-center">
+      </div>
+      
+      <div class="fail">
+        <center><h3>Oops!😶 requested movie does not exist in database. 
+        🙏Please check the spelling or try with other movies! 😀</h3></center>
+      </div>
+    
+        <div class="results">
+        <center>
+          <h2 id="name" class="text-uppercase"></h2>
+        </center>
+        </div>
+        
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: #e50914;color: white;">
+              <h5 class="modal-title" id="exampleModalLabel3">Hey there!</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" style="color: white">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Not able to find the movies while searching through auto-suggestions. No need to worry,😁 Simply type the movie name and press "enter". Typos are managed well Enjoy😊</p>
+            </div>
+            <div class="modal-footer" style="text-align: center;">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Let's go!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+        
+        <footer class="footer bg-light">
+        <br/> 
+        <div class="social " style="margin-bottom: 8px">
+        <a class="social-icons" href="https://github.com/ups1610" target="_blank"><i class="fa fa-github-alt" style="font-size:24px;color: black"></i></a>
+        <a class="social-icons" href="https://www.linkedin.com/in/upendrapratapsingh-1610/" target="_blank"><i class="fa fa-linkedin-square" style="font-size:24px;color: black"></i></a>
+        <a class="social-icons" href="https://drive.google.com/file/d/1Mvr0puxURmOWwLwmFhQOV1L9--w4OEle/view?usp=sharing" target="_blank"><i class="fa fa-file" style="font-size:24px;color: black"></i></a>
+      </div>
+      <div class="alert-light text-center m-1" role="alert">
+        Developed Under Reference
+    </div>
+      </footer>
+    </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='autocomplete.js')}}"></script>
+    
+      <script type="text/javascript" src="{{url_for('static', filename='recommend.js')}}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    </body>
+    </html>

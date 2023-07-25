@@ -54,6 +54,22 @@
     }
 }
 
+    .marquee-container {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marqueeAnimation 15s linear infinite;
+    }
+
+    @keyframes marqueeAnimation {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+
     </style>
 </head>
 <body>
@@ -97,7 +113,12 @@
                     </form>
                 </div>
             </nav>
-
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
             <div class="dashboard-container" id="myDiv">
                 <div class="alert alert-light m-2 fs-4" role="alert">
                     Dashboard
@@ -170,12 +191,12 @@
                             <h4 class="text-center text-primary mt-5">Get Relief</h4>
                             <h4 class="text-center yellow mt-1">From</h4>
                             <h4 class="text-center mt-1">Thinking</h4>
-                            <div class="d-grid gap-2 col-5 mx-auto mt-5">
-                                <button class="btn btn-outline-success fs-4" type="button">Tap to Recommend</button>    
-                            </div>
+                            <form  action="{{url_for('emotion_recommend')}}" class="d-grid gap-2 col-5 mx-auto mt-5" method="GET">
+                                <button class="btn btn-outline-success fs-4" type="submit">Tap to Recommend</button>    
+                            </form>
                         </div>
-                        <figure class="figure col mt-2 rounded">
-                            <img class="bg-dark rounded" src="" alt="" height="100%" width="100%">
+                        <figure class="figure col mt-5 rounded">
+                            <img class="bg-dark rounded" src="{{ url_for('static', filename='images/camera.png') }}" alt="" height="80%" width="100%">
                         </figure>
                     </div>
                     
@@ -198,8 +219,35 @@
               </div>
 
               <div class="dashboard-container-4" id="myDiv-4">
-                <h2>Movies Recommend</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut a nobis repellat omnis voluptas. Adipisci suscipit libero animi? Pariatur, velit corporis aliquam maxime deleniti corrupti ex voluptatum consequuntur commodi nesciunt.</p>
+                <div class="alert alert-light m-2 fs-4" role="alert">
+                    Movies Mania
+                </div>
+
+                <div class="alert alert-light m-2 fs-4" role="alert">
+                    <div class="marquee-container">
+                        <div class="marquee-content">
+                          <img src="{{ url_for('static', filename='images/marque.png') }}" alt="Image" class="w-100">
+                          <img src="{{ url_for('static', filename='images/marque.png') }}" alt="Image" class="w-100">
+                        </div>
+                      </div>
+                </div>
+
+                <div class="alert alert-light m-2 fs-4" role="alert">
+                    <form action="{{url_for('moive_suggestion')}}" class="d-grid gap-2 " method="POST">
+                        <input class="btn btn-outline-warning" type="submit" value="Let's start recommendation">
+                      </form>
+                </div>
+
+                <div class="alert alert-light m-2" role="alert">
+                    <h5 class="text-center">
+                        <a class="mr-2" href="#"><i class="fa-brands fa-linkedin" style="color: #000000;"></i></a>
+                        <a class="mr-2" href="#"><i class="fa-brands fa-github" style="color: #000000;"></i></a>
+                        <a class="mr-2" href="#"><i class="fa-solid fa-file" style="color: #000000;"></i></a>
+                    </h5>
+                         
+                    <h5 class="text-center">Developed By Upendra Pratap Singh</h5>
+                </div>
+                
               </div>
 
               <div class="dashboard-container-5" id="myDiv-5">
@@ -304,7 +352,11 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
-            var chartData = {{ chart_data | tojson | safe }};
+            var chartData = {
+                             labels: ['FER', 'Search R', 'Movie R', 'University R'],
+                             values: [40, 20, 50, 10]
+                            };
+
     
             var ctx = document.getElementById('myChart').getContext('2d');
             var myChart = new Chart(ctx, {

@@ -13,19 +13,21 @@
 </head>
 <body>
     {% for message in get_flashed_messages()%}
+       {% if message == "Invalid username and password" %}
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {{message}}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
+     {% endif %}
     {% endfor %}
     <div class="wrapper">
         <div class="logo">
             <img src="{{ url_for('static', filename='images/web_logo.png') }}" alt="">
         </div>
         <div class="text-center mt-4 name">
-            Welcome to Sangeet
+            Welcome to Get Recommend
         </div>
         <form action="{{url_for('login_page')}}" method="POST" class="p-3 mt-3">
             <div class="form-field d-flex align-items-center">
